@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="main_image_marginTop">30dp</dimen>
+    <dimen name="main_image_marginEnd">30dp</dimen>
+    <dimen name="main_image_marginStart">30dp</dimen>
+    <dimen name="main_image_marginBottom">10dp</dimen>
+    <dimen name="main_button_marginBottom">10dp</dimen>
+    <dimen name="history_textSize">25sp</dimen>
+    <dimen name="history_list_card_height">150dp</dimen>
+    <dimen name="history_list_card_margin">5dp</dimen>
+    <dimen name="history_list_card_radius">5dp</dimen>
+    <dimen name="history_list_card_elevation">5dp</dimen>
+    <dimen name="history_list_image_margin">5dp</dimen>
+</resources>

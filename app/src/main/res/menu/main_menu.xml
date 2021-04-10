@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/share_action"
+        android:title="@string/share"
+        android:icon="@drawable/ic_share"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/location_action"
+        android:title="@string/detect"
+        android:icon="@drawable/ic_location"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/hsitory_action"
+        android:title="@string/history"
+        android:icon="@drawable/ic_history"
+        app:showAsAction="ifRoom" />
+</menu>

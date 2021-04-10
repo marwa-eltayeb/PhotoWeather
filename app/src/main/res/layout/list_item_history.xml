@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:cardview="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/history_list_card_height"
+    android:layout_margin="@dimen/history_list_card_margin"
+    cardview:cardCornerRadius="@dimen/history_list_card_radius"
+    cardview:cardElevation="@dimen/history_list_card_elevation">
+
+    <ImageView
+        android:id="@+id/imgWeatherImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/history_list_image_margin"
+        android:contentDescription="@string/photo_weather"
+        android:scaleType="fitXY"
+        android:src="@color/grey" />
+</androidx.cardview.widget.CardView>
+

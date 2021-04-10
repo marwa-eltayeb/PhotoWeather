@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">PhotoWeather</string>
+    <string name="photo_weather">Photo Weather</string>
+    <string name="take_photo">Take Photo</string>
+    <string name="history">History</string>
+    <string name="share">Share</string>
+    <string name="image_preview">Image Preview</string>
+    <string name="detect">Detect</string>
+    <string name="no_history_list">No History List</string>
+</resources>
