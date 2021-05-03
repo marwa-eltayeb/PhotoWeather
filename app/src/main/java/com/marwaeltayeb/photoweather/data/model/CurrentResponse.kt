@@ -14,12 +14,5 @@ data class CurrentResponse(
     val cityName: String,
 )
 
-data class Weather(
-    @SerializedName("main")
-    val weatherState: String,
-)
 
-data class Main(
-    @SerializedName("temp")
-    val temp: Double,
-)
+
