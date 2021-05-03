@@ -62,15 +62,15 @@ class MainActivity : AppCompatActivity(), LocationCallback {
         locationService = LocationService(this, this)
 
 
-        val location = getLoc(this)
-        if (location.getLat() != null && location.getLon() != null) {
-            lat = getLoc(this).getLat()!!.toDouble()
-            lon = getLoc(this).getLon()!!.toDouble()
-        } else {
-            checkLocationPermission()
-        }
+        getCurrentLocation()
 
         mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        setUpObservers()
+
+        binding.btnTakePhoto.setOnClickListener(onPhotoTakenListener)
+    }
+
+    private fun setUpObservers() {
         mainViewModel.getWeatherStates().observe(this, { currentResponse ->
             Log.d("Yes", currentResponse.toString())
 
@@ -91,20 +91,15 @@ class MainActivity : AppCompatActivity(), LocationCallback {
         mainViewModel.getPhotoUri().observe(this, { photoUri ->
             uri = photoUri
         })
+    }
 
-        binding.btnTakePhoto.setOnClickListener {
-
-            if (!isNetworkAvailable(this)) {
-                Toast.makeText(applicationContext, "Check Internet Connection", Toast.LENGTH_LONG)
-                    .show()
-                return@setOnClickListener
-            }
-
-            if (lat != 0.0 && lon != 0.0) {
-                launchCamera()
-            } else {
-                checkLocationPermission()
-            }
+    private fun getCurrentLocation(){
+        val location = getLoc(this)
+        if (location.getLat() != null && location.getLon() != null) {
+            lat = getLoc(this).getLat()!!.toDouble()
+            lon = getLoc(this).getLon()!!.toDouble()
+        } else {
+            checkLocationPermission()
         }
     }
 
@@ -235,5 +230,21 @@ class MainActivity : AppCompatActivity(), LocationCallback {
         Toast.makeText(this, "Location Coordinates has been received.", Toast.LENGTH_LONG).show()
         lat = getLoc(this).getLat()!!.toDouble()
         lon = getLoc(this).getLon()!!.toDouble()
+    }
+
+    private val onPhotoTakenListener = object : View.OnClickListener {
+        override fun onClick(v: View?) {
+            if (!isNetworkAvailable(this@MainActivity)) {
+                Toast.makeText(applicationContext, "Check Internet Connection", Toast.LENGTH_LONG)
+                    .show()
+                return
+            }
+
+            if (lat != 0.0 && lon != 0.0) {
+                launchCamera()
+            } else {
+                checkLocationPermission()
+            }
+        }
     }
 }
