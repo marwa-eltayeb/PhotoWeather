@@ -54,12 +54,12 @@ class HistoryActivity : AppCompatActivity(), HistoryAdapter.OnItemClickListener 
         val gridLayoutManager = GridLayoutManager(this, if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) 3 else 4)
         binding.rcHistoryList.layoutManager = gridLayoutManager
         binding.rcHistoryList.setHasFixedSize(true)
-        historyAdapter.setHistoryList(historyList)
+        historyAdapter.submitList(historyList)
 
         historyAdapter.setOnItemClickListener(this)
     }
 
-    override fun onItemClick(imageUri: Uri?) {
+    override fun onItemClick(imageUri: Uri) {
         intent = Intent(this, PreviewActivity::class.java)
         intent.data = imageUri
         startActivity(intent)
