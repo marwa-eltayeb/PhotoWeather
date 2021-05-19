@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.marwaeltayeb.photoweather.R
+import com.marwaeltayeb.photoweather.databinding.ListItemHistoryBinding
 
 class HistoryAdapter : ListAdapter<Uri, RecyclerView.ViewHolder>(UriDiffCallback()) {
 
@@ -19,9 +20,8 @@ class HistoryAdapter : ListAdapter<Uri, RecyclerView.ViewHolder>(UriDiffCallback
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val inflater: LayoutInflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.list_item_history, parent, false)
-        return HistoryViewHolder(view)
+        val binding = ListItemHistoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return HistoryViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -39,10 +39,9 @@ class HistoryAdapter : ListAdapter<Uri, RecyclerView.ViewHolder>(UriDiffCallback
         mItemClickListener = listener
     }
 
-    class HistoryViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
-        var photoWeather: ImageView = itemView.findViewById(R.id.imgWeatherImage)
+    class HistoryViewHolder(private var binding: ListItemHistoryBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(image : Uri) {
-            photoWeather.setImageURI(image)
+            binding.imgWeatherImage.setImageURI(image)
         }
     }
 }
