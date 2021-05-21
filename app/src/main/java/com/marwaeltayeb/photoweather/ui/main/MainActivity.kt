@@ -123,7 +123,7 @@ class MainActivity : AppCompatActivity(), LocationCallback {
 
             Log.d(TAG, "onActivityResult $lat$lon")
 
-            mainViewModel.requestWeatherStates(lat, lon, UNIT_NAME, API_KEY)
+            mainViewModel.requestWeatherStates(lat, lon)
             binding.loadingIndicator.visibility = View.VISIBLE
         }
     }

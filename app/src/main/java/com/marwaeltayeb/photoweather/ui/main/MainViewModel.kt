@@ -12,8 +12,8 @@ class MainViewModel : ViewModel() {
 
     private var mainRepository: MainRepository = MainRepository()
 
-    fun requestWeatherStates(latitude: Double, longitude : Double, unitName: String , apiKey: String) {
-        mainRepository.requestWeatherStatesLiveData(latitude, longitude, unitName, apiKey)
+    fun requestWeatherStates(latitude: Double, longitude : Double) {
+        mainRepository.requestWeatherStatesLiveData(latitude, longitude)
     }
 
     fun getWeatherStates(): LiveData<CurrentResponse>{

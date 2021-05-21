@@ -23,10 +23,10 @@ class MainRepository {
 
     var compositeDisposable = CompositeDisposable()
 
-    fun requestWeatherStatesLiveData(latitude: Double, longitude: Double, unitName: String, apiKey: String) {
+    fun requestWeatherStatesLiveData(latitude: Double, longitude: Double) {
 
         val observable =
-            RetrofitClient.getWeatherService().getWeatherData(latitude, longitude, unitName, apiKey)
+            RetrofitClient.getWeatherService().getWeatherData(latitude, longitude)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ response: CurrentResponse? ->
