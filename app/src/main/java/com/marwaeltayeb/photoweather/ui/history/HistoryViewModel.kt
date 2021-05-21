@@ -17,4 +17,9 @@ class HistoryViewModel : ViewModel() {
     fun getCachedPhotos(): MutableLiveData<List<Uri>> {
         return historyRepository.getCachedPhotosLiveData()
     }
+
+    override fun onCleared() {
+        super.onCleared()
+        historyRepository.clearCompositeDisposable()
+    }
 }
