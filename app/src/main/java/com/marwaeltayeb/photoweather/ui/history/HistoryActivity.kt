@@ -5,58 +5,49 @@ import android.content.res.Configuration
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import androidx.core.content.FileProvider
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.marwaeltayeb.photoweather.BuildConfig
 import com.marwaeltayeb.photoweather.ui.preview.PreviewActivity
 import com.marwaeltayeb.photoweather.databinding.ActivityHistoryBinding
-import java.io.File
-
-private const val TAG = "HistoryActivity"
 
 class HistoryActivity : AppCompatActivity(), HistoryAdapter.OnItemClickListener {
 
     private lateinit var binding: ActivityHistoryBinding
+    private lateinit var historyViewModel: HistoryViewModel
 
     private lateinit var historyAdapter: HistoryAdapter
-    private var historyList: ArrayList<Uri> = ArrayList()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHistoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val imagesFolder = File(cacheDir, "images")
-        val lists = imagesFolder.listFiles()
-        if(lists!= null) {
-            for (item in lists) {
-                Log.d(TAG, item.absolutePath + "")
-                val uri: Uri = FileProvider.getUriForFile(
-                    this,
-                    "${BuildConfig.APPLICATION_ID}.fileprovider",
-                    item
-                )
-                historyList.add(uri)
-            }
-            binding.txtMessage.visibility = View.GONE
-        }
-
         initViews()
+
+        historyViewModel = ViewModelProvider(this).get(HistoryViewModel::class.java)
+
+        setUpObserver()
+
+        historyViewModel.loadCachedPhotos(this, cacheDir)
     }
 
-    private fun initViews(){
+    private fun initViews() {
         historyAdapter = HistoryAdapter()
         binding.rcHistoryList.adapter = historyAdapter
 
         val gridLayoutManager = GridLayoutManager(this, if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) 3 else 4)
         binding.rcHistoryList.layoutManager = gridLayoutManager
         binding.rcHistoryList.setHasFixedSize(true)
-        historyAdapter.submitList(historyList)
 
         historyAdapter.setOnItemClickListener(this)
+    }
+
+    private fun setUpObserver() {
+        historyViewModel.getCachedPhotos().observe(this, { photoUris ->
+            binding.txtMessage.visibility = View.GONE
+            historyAdapter.submitList(photoUris)
+        })
     }
 
     override fun onItemClick(imageUri: Uri) {
