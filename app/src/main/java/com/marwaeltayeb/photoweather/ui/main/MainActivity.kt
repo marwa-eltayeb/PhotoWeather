@@ -19,29 +19,26 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
 import com.marwaeltayeb.photoweather.R
 import com.marwaeltayeb.photoweather.databinding.ActivityMainBinding
 import com.marwaeltayeb.photoweather.ui.history.HistoryActivity
 import com.marwaeltayeb.photoweather.ui.main.location.LocationCallback
 import com.marwaeltayeb.photoweather.ui.main.location.LocationService
 import com.marwaeltayeb.photoweather.ui.main.location.LocationStorage.Companion.getLoc
-import com.marwaeltayeb.photoweather.utils.Const.Companion.API_KEY
 import com.marwaeltayeb.photoweather.utils.Const.Companion.CAMERA_PERMISSION_CODE
 import com.marwaeltayeb.photoweather.utils.Const.Companion.CAMERA_REQUEST
 import com.marwaeltayeb.photoweather.utils.Const.Companion.PERMISSIONS_REQUEST_LOCATION
-import com.marwaeltayeb.photoweather.utils.Const.Companion.UNIT_NAME
 import com.marwaeltayeb.photoweather.utils.ImageUtils.drawTextOnBitmap
 import com.marwaeltayeb.photoweather.utils.ImageUtils.shareImageUri
 import com.marwaeltayeb.photoweather.utils.NetworkUtils.isNetworkAvailable
-
+import org.koin.android.viewmodel.ext.android.viewModel
 
 private const val TAG = "MainActivity"
 
 class MainActivity : AppCompatActivity(), LocationCallback {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var mainViewModel: MainViewModel
+    private val mainViewModel: MainViewModel by viewModel()
 
     private lateinit var uri: Uri
 
@@ -61,10 +58,8 @@ class MainActivity : AppCompatActivity(), LocationCallback {
         locationManager = getSystemService(LOCATION_SERVICE) as LocationManager?
         locationService = LocationService(this, this)
 
-
         getCurrentLocation()
 
-        mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         setUpObservers()
 
         binding.btnTakePhoto.setOnClickListener(onPhotoTakenListener)

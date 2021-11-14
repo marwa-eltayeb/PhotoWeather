@@ -13,9 +13,8 @@ import java.io.File
 
 private const val TAG = "MainViewModel"
 
-class MainViewModel : ViewModel() {
+class MainViewModel(private var mainRepository: MainRepository) : ViewModel() {
 
-    private var mainRepository: MainRepository = MainRepository()
     private val weatherStateLiveData: MutableLiveData<CurrentResponse> = MutableLiveData<CurrentResponse>()
     private val photoUriLiveData: MutableLiveData<Uri> = MutableLiveData<Uri>()
     private var compositeDisposable = CompositeDisposable()

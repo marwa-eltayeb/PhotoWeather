@@ -6,15 +6,15 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.marwaeltayeb.photoweather.ui.preview.PreviewActivity
 import com.marwaeltayeb.photoweather.databinding.ActivityHistoryBinding
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class HistoryActivity : AppCompatActivity(), HistoryAdapter.OnItemClickListener {
 
     private lateinit var binding: ActivityHistoryBinding
-    private lateinit var historyViewModel: HistoryViewModel
+    private val historyViewModel: HistoryViewModel by viewModel()
 
     private lateinit var historyAdapter: HistoryAdapter
 
@@ -24,8 +24,6 @@ class HistoryActivity : AppCompatActivity(), HistoryAdapter.OnItemClickListener 
         setContentView(binding.root)
 
         initViews()
-
-        historyViewModel = ViewModelProvider(this).get(HistoryViewModel::class.java)
 
         setUpObserver()
 

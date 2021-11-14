@@ -10,9 +10,8 @@ import java.io.File
 
 private const val TAG = "HistoryViewModel"
 
-class HistoryViewModel : ViewModel() {
+class HistoryViewModel(private var historyRepository: HistoryRepository ) : ViewModel() {
 
-    private var historyRepository: HistoryRepository = HistoryRepository()
     private val imagesPhotoUris: MutableLiveData<List<Uri>> = MutableLiveData<List<Uri>>()
     private var compositeDisposable = CompositeDisposable()
 
